@@ -12,8 +12,9 @@ RUN yum update -y \
 
 FROM amazonlinux:2
 RUN yum update -y \
-  && yum install -y less groff \
-  && yum clean all
+  && yum install -y less groff git \
+  && yum clean all \
+  && rm -rf /var/cache/yum 
 COPY --from=installer /usr/local/aws-cli/ /usr/local/aws-cli/
 COPY --from=installer /aws-cli-bin/ /usr/local/bin/
 WORKDIR /aws
